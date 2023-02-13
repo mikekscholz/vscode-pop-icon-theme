@@ -1,6 +1,5 @@
-<div align="center">
 # POP! Icon Theme
-
+<div align="center">
 <img src="logo.png" alt="pop file icon" width="40%">
 </div>
 
