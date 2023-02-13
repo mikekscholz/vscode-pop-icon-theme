@@ -1,8 +1,8 @@
-# Pop Icon Theme
+<div align="center">
+# POP! Icon Theme
 
-<img src="logo.png" alt="pop file icon" width="20%">
-
-![Logo](logo.png)
+<img src="logo.png" alt="pop file icon" width="40%">
+</div>
 
 Based off of the Helium Icons extension with extensive code cleanup, slight restyling, and extended customization abilities.
 
