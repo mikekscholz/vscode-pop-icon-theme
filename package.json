@@ -1,0 +1,226 @@
+{
+  "name": "pop-icon-theme",
+  "displayName": "POP! Icon Theme",
+  "description": "POP! File Icon Theme for Visual Studio Code. Based on Helium Icons.",
+  "version": "1.0.0",
+  "publisher": "mikekscholz",
+  "engines": {
+    "vscode": "^1.5.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mikekscholz/vscode-pop-icon-theme.git"
+  },
+  "icon": "logo.png",
+  "categories": [
+    "Themes"
+  ],
+  "keywords": [
+    "pop",
+    "icons",
+    "theme",
+    "material",
+    "helium",
+    "icon-theme",
+    "customization"
+  ],
+  "extensionKind": [
+    "ui"
+  ],
+  "vsce": {
+    "baseImagesUrl": null,
+    "baseContentUrl": null
+  },
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./dist/extension",
+  "contributes": {
+    "iconThemes": [
+      {
+        "id": "pop-icon-theme",
+        "label": "POP! Icon Theme",
+        "path": "./dist/pop-icons.json",
+        "_watch": true
+      }
+    ],
+    "commands": [
+      {
+        "command": "pop-icon-theme.activateIcons",
+        "title": "%command.activateIcons%"
+      },
+      {
+        "command": "pop-icon-theme.toggleIconPacks",
+        "title": "%command.toggleIconPacks%"
+      },
+      {
+        "command": "pop-icon-theme.changeFolderTheme",
+        "title": "%command.changeFolderTheme%"
+      },
+      {
+        "command": "pop-icon-theme.changeFolderColor",
+        "title": "%command.changeFolderColor%"
+      },
+      {
+        "command": "pop-icon-theme.restoreDefaultConfig",
+        "title": "%command.restoreDefaultConfig%"
+      },
+      {
+        "command": "pop-icon-theme.toggleExplorerArrows",
+        "title": "%command.toggleExplorerArrows%"
+      },
+      {
+        "command": "pop-icon-theme.changeOpacity",
+        "title": "%command.changeOpacity%"
+      },
+      {
+        "command": "pop-icon-theme.toggleGrayscale",
+        "title": "%command.toggleGrayscale%"
+      },
+      {
+        "command": "pop-icon-theme.changeSaturation",
+        "title": "%command.changeSaturation%"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "%configuration.title%",
+      "properties": {
+        "pop-icon-theme.showWelcomeMessage": {
+          "type": "boolean",
+          "default": true,
+          "description": "%configuration.showWelcomeMessage%"
+        },
+        "pop-icon-theme.showUpdateMessage": {
+          "type": "boolean",
+          "default": false,
+          "description": "%configuration.showUpdateMessage%"
+        },
+        "pop-icon-theme.showReloadMessage": {
+          "type": "boolean",
+          "default": true,
+          "description": "%configuration.showReloadMessage%"
+        },
+        "pop-icon-theme.activeIconPack": {
+          "type": "string",
+          "default": "angular",
+          "description": "%configuration.activeIconPack%",
+          "enumDescriptions": [
+            "%configuration.activeIconPack.angular%",
+            "%configuration.activeIconPack.angular_ngrx%",
+            "%configuration.activeIconPack.react%",
+            "%configuration.activeIconPack.react_redux%",
+            "%configuration.activeIconPack.vue%",
+            "%configuration.activeIconPack.vue_vuex%",
+            "%configuration.activeIconPack.nest%",
+            "%configuration.activeIconPack.none%"
+          ],
+          "enum": [
+            "angular",
+            "angular_ngrx",
+            "react",
+            "react_redux",
+            "vue",
+            "vue_vuex",
+            "nest",
+            "none"
+          ]
+        },
+        "pop-icon-theme.files.associations": {
+          "type": "object",
+          "default": {},
+          "description": "%configuration.files.associations%"
+        },
+        "pop-icon-theme.folders.associations": {
+          "type": "object",
+          "default": {},
+          "description": "%configuration.folders.associations%"
+        },
+        "pop-icon-theme.languages.associations": {
+          "type": "object",
+          "default": {},
+          "description": "%configuration.languages.associations%"
+        },
+        "pop-icon-theme.folders.theme": {
+          "type": "string",
+          "default": "specific",
+          "description": "%configuration.folders.theme%",
+          "enumDescriptions": [
+            "%configuration.folders.theme.specific%",
+            "%configuration.folders.theme.classic%",
+            "%configuration.folders.theme.none%"
+          ],
+          "enum": [
+            "specific",
+            "classic",
+            "none"
+          ]
+        },
+        "pop-icon-theme.folders.color": {
+          "type": "string",
+          "default": "#00b6ff",
+          "pattern": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
+          "description": "%configuration.folders.color%"
+        },
+        "pop-icon-theme.opacity": {
+          "type": "number",
+          "default": 1,
+          "minimum": 0,
+          "maximum": 1,
+          "description": "%configuration.opacity%"
+        },
+        "pop-icon-theme.hidesExplorerArrows": {
+          "type": "boolean",
+          "default": false,
+          "description": "%configuration.hidesExplorerArrows%"
+        },
+        "pop-icon-theme.saturation": {
+          "type": "number",
+          "default": 2,
+          "minimum": 0,
+          "maximum": 5,
+          "description": "%configuration.saturation%"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "npm run compile:dev && npm run postcompile",
+    "check": "ts-node ./src/scripts/icons/checks",
+    "compile": "webpack --mode production",
+    "compile:dev": "webpack --mode none",
+    "compile:watch": "webpack --mode none --watch",
+    "contributors": "ts-node ./src/scripts/contributors/index.ts",
+    "generateJson": "ts-node ./src/scripts/icons/generateJson.ts",
+    "lint": "tslint -c tslint.json ./src/**/*.ts --fix",
+    "postcompile": "npm run generateJson && npm run check",
+    "pretest": "npm run build && tsc -p ./",
+    "preview": "ts-node ./src/scripts/preview",
+    "test": "node ./out/test/runTest.js",
+    "vscode:prepublish": "npm run compile"
+  },
+  "dependencies": {
+    "lodash.merge": "4.6.2",
+    "open": "6.4.0",
+    "semver": "6.3.0"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.1",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.7.2",
+    "@types/puppeteer": "^1.19.1",
+    "@types/vscode": "^1.5.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "glob": "^7.1.4",
+    "mocha": "^6.2.0",
+    "puppeteer": "^1.19.0",
+    "rimraf": "^3.0.0",
+    "ts-loader": "^9.4.2",
+    "ts-node": "^8.3.0",
+    "tslint": "^5.19.0",
+    "typescript": "^3.6.2",
+    "vscode-test": "^1.2.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  }
+}
